@@ -4,7 +4,7 @@ import Image from 'next/image'
 import "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return <div></div>;
 }
 
 export default Home
