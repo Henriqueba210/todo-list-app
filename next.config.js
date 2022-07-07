@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
-const path = require('path')
 const nextConfig = {
-  reactStrictMode: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+  experimental: {
+    images: {
+      layoutRaw: true,
+    },
   },
-}
+  images: {
+    domains: ["flowbite.com"],
+  },
+  reactStrictMode: true,
+};
 
 module.exports = nextConfig

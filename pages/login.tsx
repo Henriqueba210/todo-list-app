@@ -1,22 +1,28 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { auth } from "../lib/firebase";
+import { toast, Toaster } from "react-hot-toast";
 import "../styles/Home.module.css";
+import { SignInForm, FormStatus } from "../components/signInForm";
 interface userForm {
   email: string;
   password: string;
   remember: boolean;
 }
+
 const Login: NextPage = () => {
-  const [email, setEmail] = useState("");
   const { register, handleSubmit } = useForm<userForm>();
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  const onSubmit = handleSubmit((data) => signInWithCredentials(data));
+  const [showFrom, setShowForm] = useState(false);
+
   return (
     <div>
+      <Toaster />
+      <SignInForm showForm={showFrom} setShowForm={setShowForm} />
       <div className="min-h-screen flex flex-col justify-center">
         <div className="mx-auto w-[18rem] h-[4.5rem] bg-blue-500 rounded text-center flex justify-center items-center drop-shadow-2xl">
           <h1 className="h-auto text-[45px] font-bold text-white ">
@@ -76,16 +82,12 @@ const Login: NextPage = () => {
                 Login
               </button>
             </div>
-            <div className="!mt-2">
-              <a
-                href=""
-                className="'font-medium text-m text-blue-800 underline"
-              >
-                Register Here
-              </a>
-            </div>
             <div className="!mt-16">
-              <button className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-full text-white text-sm">
+              <button
+                className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-full text-white text-sm"
+                type="button"
+                onClick={() => setShowForm(true)}
+              >
                 Register Here
               </button>
             </div>
@@ -95,5 +97,18 @@ const Login: NextPage = () => {
     </div>
   );
 };
+
+function signInWithCredentials(useForm: userForm) {
+  const authPromise = signInWithEmailAndPassword(
+    auth,
+    useForm.email,
+    useForm.password
+  );
+  toast.promise(authPromise, {
+    loading: "loading",
+    success: "success",
+    error: "Usuário ou Senha Incorretos",
+  });
+}
 
 export default Login;
