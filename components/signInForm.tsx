@@ -52,7 +52,7 @@ export default function SignInForm(formStatus: FormStatus) {
             <div>
               <label
                 htmlFor=""
-                className="text-sm font-bold text-gray-600 block"
+                className="text-sm font-bold text-gray-200 block"
               >
                 Email
               </label>
@@ -67,7 +67,7 @@ export default function SignInForm(formStatus: FormStatus) {
             <div>
               <label
                 htmlFor=""
-                className="text-sm font-bold text-gray-600 block"
+                className="text-sm font-bold text-gray-200 block"
               >
                 Password
               </label>

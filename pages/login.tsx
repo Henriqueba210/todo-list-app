@@ -104,9 +104,9 @@ function signInWithCredentials(useForm: userForm) {
     useForm.password
   );
   toast.promise(authPromise, {
-    loading: "loading",
-    success: "success",
-    error: "Usuário ou Senha Incorretos",
+    loading: "Loading",
+    success: "Success",
+    error: "Invalid E-mail or Password",
   });
 }
 
