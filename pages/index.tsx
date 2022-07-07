@@ -4,7 +4,8 @@ import Image from 'next/image'
 import "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  return <div></div>;
+  return <div>    
+  </div>;
 }
 
 export default Home
