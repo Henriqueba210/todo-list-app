@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { auth } from "../lib/firebase";
 
-export interface FormStatus {
+interface FormStatus {
   showForm: boolean;
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,7 +17,7 @@ interface RegisterForm {
   password: string;
 }
 
-export const SignInForm: NextPage<FormStatus> = (formStatus: FormStatus) => {
+export default function SignInForm(formStatus: FormStatus) {
   let [userCreatedSucessefuly, setFormState] = useState(false);
   const { register, handleSubmit } = useForm<RegisterForm>();
   const onSubmit = handleSubmit((data) => registerUser(data));
@@ -41,8 +41,7 @@ export const SignInForm: NextPage<FormStatus> = (formStatus: FormStatus) => {
   }
 
   return (
-    <React.Fragment>
-      <Toaster />
+    <div>
       <Modal
         show={formStatus.showForm}
         onClose={() => formStatus.setShowForm(false)}
@@ -88,6 +87,6 @@ export const SignInForm: NextPage<FormStatus> = (formStatus: FormStatus) => {
           </form>
         </Modal.Body>
       </Modal>
-    </React.Fragment>
+    </div>
   );
 };
