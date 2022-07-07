@@ -1,13 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { auth } from "../lib/firebase";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import "../styles/Home.module.css";
-import { SignInForm, FormStatus } from "../components/signInForm";
+import dynamic from "next/dynamic";
 interface userForm {
   email: string;
   password: string;
@@ -18,12 +16,13 @@ const Login: NextPage = () => {
   const { register, handleSubmit } = useForm<userForm>();
   const onSubmit = handleSubmit((data) => signInWithCredentials(data));
   const [showFrom, setShowForm] = useState(false);
+  const renderModal = false;
+  const SignInForm = dynamic(() => import("../components/signInForm"));
 
   return (
     <div>
-      <Toaster />
       <SignInForm showForm={showFrom} setShowForm={setShowForm} />
-      <div className="min-h-screen flex flex-col justify-center">
+      <div className="h-100 mt-24 flex flex-col justify-center">
         <div className="mx-auto w-[18rem] h-[4.5rem] bg-blue-500 rounded text-center flex justify-center items-center drop-shadow-2xl">
           <h1 className="h-auto text-[45px] font-bold text-white ">
             Task Easy
@@ -105,9 +104,9 @@ function signInWithCredentials(useForm: userForm) {
     useForm.password
   );
   toast.promise(authPromise, {
-    loading: "loading",
-    success: "success",
-    error: "Usuário ou Senha Incorretos",
+    loading: "Loading",
+    success: "Success",
+    error: "Invalid E-mail or Password",
   });
 }
 

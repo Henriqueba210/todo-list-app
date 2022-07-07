@@ -2,6 +2,7 @@
  * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
  */
  module.exports = {
+  darkMode: 'media',
   content: [
     "./components/**/*.{ts,tsx}",
     "./pages/**/*.{ts,tsx}",
