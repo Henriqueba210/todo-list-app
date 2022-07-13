@@ -6,11 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { auth } from "../lib/firebase";
-
-interface FormStatus {
-  showForm: boolean;
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { FormStatus } from "../lib/interfaces";
 
 interface RegisterForm {
   email: string;

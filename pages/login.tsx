@@ -1,11 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { auth } from "../lib/firebase";
 import { toast } from "react-hot-toast";
 import "../styles/Home.module.css";
 import dynamic from "next/dynamic";
+import { Router, useRouter } from "next/router";
+import { UserContext } from "../lib/context";
 interface userForm {
   email: string;
   password: string;
@@ -18,11 +20,36 @@ const Login: NextPage = () => {
   const [showFrom, setShowForm] = useState(false);
   const renderModal = false;
   const SignInForm = dynamic(() => import("../components/signInForm"));
+  const router = useRouter();
+  const { user, username } = useContext(UserContext);
+
+  function signInWithCredentials(useForm: userForm) {
+    const authPromise = signInWithEmailAndPassword(
+      auth,
+      useForm.email,
+      useForm.password
+    );
+    toast
+      .promise(authPromise, {
+        loading: "Loading",
+        success: "Success",
+        error: "Invalid E-mail or Password",
+      })
+      .then(() => {
+        router.replace("/dashboard");
+      });
+  }
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/dashboard");
+    }
+  }, [router, user]);
 
   return (
-    <div>
+    <div className="dark:bg-gray-900 min-h-screen min-w-full flex min-w-screen justify-center items-center">
       <SignInForm showForm={showFrom} setShowForm={setShowForm} />
-      <div className="h-100 mt-24 flex flex-col justify-center">
+      <div className="max-h-fit min-w-full">
         <div className="mx-auto w-[18rem] h-[4.5rem] bg-blue-500 rounded text-center flex justify-center items-center drop-shadow-2xl">
           <h1 className="h-auto text-[45px] font-bold text-white ">
             Task Easy
@@ -96,18 +123,5 @@ const Login: NextPage = () => {
     </div>
   );
 };
-
-function signInWithCredentials(useForm: userForm) {
-  const authPromise = signInWithEmailAndPassword(
-    auth,
-    useForm.email,
-    useForm.password
-  );
-  toast.promise(authPromise, {
-    loading: "Loading",
-    success: "Success",
-    error: "Invalid E-mail or Password",
-  });
-}
 
 export default Login;
