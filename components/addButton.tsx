@@ -1,6 +1,13 @@
-export default function AddButton() {
+type onClickHandler = {
+  onClickHandler: () => void;
+};
+
+export default function AddButton({ onClickHandler }: onClickHandler) {
   return (
-    <div className="absolute bottom-0 right-0 mr-3 mb-3">
+    <div
+      className="absolute bottom-0 right-0 mr-3 mb-3"
+      onClick={() => onClickHandler()}
+    >
       <button className="p-0 w-10 h-10 bg-blue-700 rounded-full hover:bg-blue-900 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
         <svg
           viewBox="0 0 20 20"

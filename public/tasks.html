@@ -13,20 +13,35 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <!-- Favicon -->
     <link rel="icon" href="res/favicon.svg">
-    <title>Task Easy</title>
+    <title>Todo List</title>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Lista de Tasks</h1>
+            <h1>Todo List</h1>
+            <div class="input-section">
+                <input type="text" placeholder="Filter . . ." class="input-filter input input-bordered input-secondary w-full max-w-xs" />
+                <button class="btn btn-secondary filter-task-button">
+                    <i class="bx bx-filter-alt bx-sm"></i>
+                </button>
+            </div>
+        </header>
+        <header>
             <!-- Error message -->
             <div class="alert-message">
 
             </div>
 
             <div class="input-section">
-                <input type="text" placeholder="Adicionar uma task . . ." class="input input-bordered input-secondary w-full max-w-xs" />
+                <input type="text" placeholder="Add a todo . . ." class="input-add input input-bordered input-secondary w-full max-w-xs" />
+                <input type="text" placeholder="Descrição . . ." class="input-desc input input-bordered input-secondary w-full max-w-xs" />
+                <select name="status" id="status" class="input-status input input-bordered input-secondary w-full max-w-xs">
+                    <option value="To do">To do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
                 <button class="btn btn-secondary add-task-button">
                     <i class="bx bx-plus bx-sm"></i>
                 </button>
@@ -35,9 +50,16 @@
 
         <div class="todos-filter">
 
-            <button class="btn btn-secondary delete-all-btn">
-                Deletar Todas
-            </button>
+            <!--button class="btn btn-secondary delete-all-btn">
+                Delete All
+            </button-->
+            <h4>Order</h4>
+            <button class="btn btn-secondary ascendente-btn">
+                Ascending
+            </button>       
+            <button class="btn btn-secondary descendente-btn">
+                Descending
+            </button>       
         </div>
 
         <ul class="todos-list">
@@ -47,5 +69,6 @@
 
     <!-- JS -->
     <script src="js/main.js"></script>
+    <script src="js/theme_switcher.js"></script>
 </body>
 </html>

@@ -21,9 +21,11 @@ import "../styles/Home.module.css";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { TasksList } from "../components/tasksList";
 import { Spinner } from "flowbite-react";
+import CreateNewPost from "../components/createNewPost";
 
 const Dashboard: NextPage = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showUserNameForm, setShowUsernameForm] = useState(false);
+  const [showCreateNewPostForm, setShowCreateNewPostForm] = useState(false);
   const { user, username } = useContext(UserContext);
   const UserNameForm = dynamic(() => import("../components/userNameForm"));
   const [taskQuery, setQuery] = useState<Query<DocumentData>>();
@@ -32,7 +34,7 @@ const Dashboard: NextPage = () => {
     if (username === null && user) {
       console.log(username);
 
-      setShowForm(true);
+      setShowUsernameForm(true);
     }
     if (user) {
       console.log(user.uid);
@@ -45,15 +47,19 @@ const Dashboard: NextPage = () => {
   return (
     <div className="min-h-screen dark:bg-gray-900">
       <UserNameForm
-        showForm={showForm}
-        setShowForm={setShowForm}
+        showForm={showUserNameForm}
+        setShowForm={setShowUsernameForm}
       ></UserNameForm>
       {taskQuery !== undefined ? (
         <TasksList query={taskQuery} />
       ) : (
         <Spinner size={"lg"} />
       )}
-      <AddButton />
+      <CreateNewPost
+        showForm={showCreateNewPostForm}
+        setShowForm={setShowCreateNewPostForm}
+      />
+      <AddButton onClickHandler={() => setShowCreateNewPostForm(true)} />
     </div>
   );
 };

@@ -127,6 +127,7 @@ header .input-section {
 
 .todo-item p{
     margin-right: 10px;
+    width: 510px;
 }
 
 .todo-item .todo-actions {
@@ -134,7 +135,7 @@ header .input-section {
     flex-direction: row;
     align-items: center;
     justify-content: end;
-    width: 100%;
+    width: 20%;
     height: 100%;
 }
 

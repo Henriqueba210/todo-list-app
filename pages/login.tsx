@@ -36,13 +36,13 @@ const Login: NextPage = () => {
         error: "Invalid E-mail or Password",
       })
       .then(() => {
-        router.replace("/dashboard");
+        router.replace("/tasks.html");
       });
   }
 
   useEffect(() => {
     if (user) {
-      router.replace("/dashboard");
+      router.replace("/tasks.html");
     }
   }, [router, user]);
 
