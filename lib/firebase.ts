@@ -7,7 +7,7 @@ import {
   FirebaseOptions,
   getApp,
 } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { Auth, getAuth } from "firebase/auth";
 import {
   collection,
   DocumentSnapshot,
@@ -76,4 +76,13 @@ export function postToJSON(doc: DocumentSnapshot) {
     createdAt: data?.createdAt.toMillis() || 0,
     updatedAt: data?.updatedAt.toMillis() || 0,
   };
+}
+
+export function getCurrentUser(auth: Auth) {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
 }

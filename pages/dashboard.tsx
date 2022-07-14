@@ -19,11 +19,14 @@ import { UserContext } from "../lib/context";
 import { auth, firestore } from "../lib/firebase";
 import "../styles/Home.module.css";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { TasksList } from "../components/tasksList";
+import { Spinner } from "flowbite-react";
 
 const Dashboard: NextPage = () => {
   const [showForm, setShowForm] = useState(false);
   const { user, username } = useContext(UserContext);
   const UserNameForm = dynamic(() => import("../components/userNameForm"));
+  const [taskQuery, setQuery] = useState<Query<DocumentData>>();
 
   useEffect(() => {
     if (username === null && user) {
@@ -31,7 +34,13 @@ const Dashboard: NextPage = () => {
 
       setShowForm(true);
     }
-  }, [username]);
+    if (user) {
+      console.log(user.uid);
+      setQuery(
+        query(collection(firestore, "tasks"), where("userID", "==", user?.uid))
+      );
+    }
+  }, [username, user]);
 
   return (
     <div className="min-h-screen dark:bg-gray-900">
@@ -39,6 +48,11 @@ const Dashboard: NextPage = () => {
         showForm={showForm}
         setShowForm={setShowForm}
       ></UserNameForm>
+      {taskQuery !== undefined ? (
+        <TasksList query={taskQuery} />
+      ) : (
+        <Spinner size={"lg"} />
+      )}
       <AddButton />
     </div>
   );
