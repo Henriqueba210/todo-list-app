@@ -60,7 +60,7 @@ const Login: NextPage = () => {
             <div>
               <label
                 htmlFor=""
-                className="text-sm font-bold text-gray-600 block"
+                className="text-sm font-bold text-gray-600 dark:text-gray-300 block"
               >
                 Email
               </label>
@@ -75,7 +75,7 @@ const Login: NextPage = () => {
             <div>
               <label
                 htmlFor=""
-                className="text-sm font-bold text-gray-600 block"
+                className="text-sm font-bold text-gray-600 dark:text-gray-300 block"
               >
                 Password
               </label>
@@ -87,30 +87,22 @@ const Login: NextPage = () => {
                 className="w-full p-2 border border-gray-300 hover:border-blue-300 focus:border-blue-400 rounded mt-1"
               />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input type="checkbox" className="h-4 text-blue-400 rounded" />
-                <label htmlFor="" className="ml-2 text-sm text-gray-600">
-                  Remember Me
-                </label>
-              </div>
-              <div>
-                <a
-                  href=""
-                  className="font-medium text-sm text-blue-800 underline"
-                >
-                  Forgot Password
-                </a>
-              </div>
+            <div className="flex ">
+              <a
+                href=""
+                className="font-medium text-sm text-blue-700 underline"
+              >
+                Forgot Password
+              </a>
             </div>
             <div>
-              <button className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-full text-white text-sm">
+              <button className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-800 rounded-full text-white text-sm">
                 Login
               </button>
             </div>
             <div className="!mt-16">
               <button
-                className="w-full py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-full text-white text-sm"
+                className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-800 rounded-full text-white text-sm"
                 type="button"
                 onClick={() => setShowForm(true)}
               >
